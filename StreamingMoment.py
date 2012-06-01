@@ -11,20 +11,20 @@ class StreamingMoment(object):
             self.moments[i] += data_point ** i
 
     def moment(self, m):
-        return self.moments[0] / self.n - / self.moments[m]
+        return self.moments[m]
     
     def mean(self):
-        return self.moments[1] / self.n 
+        return self.moments(1) / self.n
 
     def variance(self):
-        return (self.moments[2]) - (self.mean() ** 2)
+        return (self.moments(2)) - (self.mean() ** 2)
 
     def std(self):
         return math.sqrt(self.variance)
 
     def skew(self):
-        return ((self.moments[3] / self.n) - (3 * self.mean() * self.variance) - self.mean ** 3) / (self.std **3)
+        return ((self.moments(3) / self.n) - (3 * self.mean() * self.variance) - self.mean ** 3) / (self.std **3)
 
     # http://www.ats.ucla.edu/stat/mult_pkg/faq/general/kurtosis.htm    
     def kurtosis(self):
-        return ((self.moments[4] - (self.mean ** 4)) / self.n) / ((self.variance / n) ** 2) - 3
+        return ((self.moments(4) - (self.mean ** 4)) / self.n) / ((self.variance / n) ** 2) - 3
