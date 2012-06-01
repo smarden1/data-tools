@@ -17,10 +17,9 @@ class FrequencyTable(object):
         self.min = min(self.min, key)
         self.is_sorted = False
 
-     # TODO - this percentile is wrong
     def percentile(self, percentile):
         """
-            takes a percentoile
+            takes a percentile
             returns the key for that percentile
         """
         if percentile > 1.0:
