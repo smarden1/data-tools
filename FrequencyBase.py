@@ -38,3 +38,15 @@ class FrequencyBase(Moments.Moments):
 
     def moment(self, n):
         return sum(i ** n for i in self.explode())
+
+    def pdf(self):
+        return ((k, v / self.total) for k,v in self.ordered_data().iteritems())
+
+    def cdf(self):
+        cdf, current = {}, 0
+
+        for k,v in self.pdf():
+            current += v
+            cdf[k] = current
+
+        return cdf
