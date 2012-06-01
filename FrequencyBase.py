@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
+import math
+
 class FrequencyBase(object):
     
     __metaclass__ = ABCMeta
@@ -19,6 +21,9 @@ class FrequencyBase(object):
     def average(self):
         return self.total / self.n
 
+    def mean(self):
+        return self.average()
+
     @abstractmethod
     def percentile(self, percentile):
         pass
@@ -26,3 +31,10 @@ class FrequencyBase(object):
     @abstractmethod
     def ordered_data(self):
         pass
+
+    @abstractmethod
+    def explode(self):
+        pass
+
+    def moment(self, n):
+        return sum(i ** n for i in self.explode())

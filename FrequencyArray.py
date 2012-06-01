@@ -46,5 +46,8 @@ class FrequencyArray(object):
 
         return self.ordered_data()[p]
 
+    def explode(self):
+        for i in self.ordered_data:
+            yield i
     
 FrequencyBase.register(FrequencyArray)
