@@ -43,6 +43,10 @@ class FrequencyBase(Moments.Moments):
     def explode(self):
         pass
 
+    @abstractmethod
+    def mode(self):
+        pass
+
     def moment(self, n):
         return sum(i ** n for i in self.explode())
 

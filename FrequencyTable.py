@@ -37,16 +37,7 @@ class FrequencyTable(object):
         return k
 
     def mode(self):
-        most_popular_dict = {}
-
-        for k,v in self.data.iteritems():
-            if not most_popular_dict or current == v:
-                most_popular_dict[k] = v
-                current = v
-            else
-                most_popular_dict = {k: v}
-                
-        return most_popular_dict
+        return max(self.data.iteritems(), key = lambda a:a[1])
 
     def ordered_data(self):
         if not self.is_sorted:

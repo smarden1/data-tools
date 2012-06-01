@@ -1,5 +1,6 @@
 import math
 from FrequencyBase import FrequencyBase
+from collections import namedtuple
 
 class FrequencyArray(object):
 
@@ -49,5 +50,19 @@ class FrequencyArray(object):
     def explode(self):
         for i in self.ordered_data:
             yield i
+
+    def mode(self):
+        Pair = namedtuple("Pair", "key value")
+
+        current_pair = Pair(self.ordered_data[0], 1)
+        max_pair = current_pair
+
+        for i in self.ordered_data[1:]:
+            if i != current_pair.key:
+                max_pair = max(max_pair, current_pair, key = lambda a: a.value)
+                current_pair = Pair(i, 1)
+            current_pair.value += 1
+
+        return max(max_pair, current_pair, key = lambda a: a.value).key
     
 FrequencyBase.register(FrequencyArray)
