@@ -1,8 +1,8 @@
 from abc import ABCMeta, abstractmethod
-
+import Moments
 import math
 
-class FrequencyBase(object):
+class FrequencyBase(Moments.Moments):
     
     __metaclass__ = ABCMeta
     
