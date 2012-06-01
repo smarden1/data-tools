@@ -1,6 +1,6 @@
 import Moments
 
-class StreamingMoment(Moments.Moments):
+class StreamingMoments(Moments.Moments):
 
     def __init__(self):
         self.n = 0
