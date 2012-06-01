@@ -6,11 +6,7 @@ class FrequencyTable(object):
 
     def __init__(self):
         self.data = collections.defaultdict(lambda : 0)
-        self.total = 0.
-        self.n = 0.
-        self.max = None
-        self.min = float("inf")
-        self.is_sorted = False
+        super.__init__()
 
     # cl tools casts this to int
     def add(self, key, count = 1):
@@ -51,18 +47,6 @@ class FrequencyTable(object):
                 most_popular_dict = {k: v}
                 
         return most_popular_dict
-
-    def pdf(self):
-        return ((k, v / self.total) for k,v in self.ordered_data().iteritems())
-
-    def cdf(self):
-        cdf, current = {}, 0
-
-        for k,v in self.pdf():
-            current += v
-            cdf[k] = current
-
-        return cdf
 
     def ordered_data(self):
         if not self.is_sorted:

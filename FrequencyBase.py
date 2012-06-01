@@ -5,7 +5,14 @@ import math
 class FrequencyBase(Moments.Moments):
     
     __metaclass__ = ABCMeta
-    
+
+    def __init__(self):
+        self.total = 0.
+        self.n = 0.
+        self.max = None
+        self.min = float("inf")
+        self.is_sorted = False
+        
     def firstQuartile(self):
         return self.percentile(.25)
     
