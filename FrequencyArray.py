@@ -53,16 +53,18 @@ class FrequencyArray(object):
 
     def mode(self):
         Pair = namedtuple("Pair", "key value")
+        f = lambda k,v : max(k, v, key = lambda a: a.value)
 
         current_pair = Pair(self.ordered_data[0], 1)
         max_pair = current_pair
 
         for i in self.ordered_data[1:]:
             if i != current_pair.key:
-                max_pair = max(max_pair, current_pair, key = lambda a: a.value)
+                max_pair = f(max_pair, current_pair)
                 current_pair = Pair(i, 1)
             current_pair.value += 1
 
-        return max(max_pair, current_pair, key = lambda a: a.value).key
+        # edge case of last being most common
+        return f(max_pair, current_pair).key
     
 FrequencyBase.register(FrequencyArray)
