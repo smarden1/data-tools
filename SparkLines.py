@@ -1,6 +1,10 @@
 import math
 
 class SparkLines(object):
+    """
+        inspired by Stefan van der Walt <stefan@sun.ac.za>
+        https://github.com/holman/spark
+    """
 
     bars = [
         '\xe2\x96\x81',
