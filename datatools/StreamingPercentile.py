@@ -93,17 +93,4 @@ class StreamingPercentile(object):
         return map(self.desired_marker_position, range(5))
 
     def desired_marker_position(self, index):
-        return self.desired_marker_positions_generator[index]()            
-
-
-# put somewhere else
-def window(iterable, n):
-    """takes an iterable and a number and returns a sliding buffer"""
-    window = []
-    for i, e in enumerate(iterable):
-        window.append(e)
-        if i >= n:
-            window.pop(0)
-            yield window
-        if i == n - 1:
-            yield window
+        return self.desired_marker_positions_generator[index]()
