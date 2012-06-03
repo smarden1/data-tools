@@ -32,7 +32,7 @@ class TestEmptyFrequencyArray(unittest.TestCase):
         self.assertEqual(self.ranged_fa.max, 10)
 
     def test_min(self):
-        self.assertEqual(self.ranged_fa.max, 1)
+        self.assertEqual(self.ranged_fa.min, 1)
 
 if __name__ == "__main__":
     unittest.main()

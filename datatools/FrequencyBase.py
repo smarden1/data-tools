@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
-import Moments
 import math
+import Moments
 
 class FrequencyBase(Moments.Moments):
     

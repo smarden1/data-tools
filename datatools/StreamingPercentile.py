@@ -68,7 +68,7 @@ class StreamingPercentile(object):
                     d = float(cmp(self.positions[i], desired_marker_position))
                     self.markers[i] += self.height_delta(i)
                     self.postions[i] += d
-               
+
     def height_delta(self, i, d = 1.):
         p2 = self.parabolic_prediction(i, d)
 
@@ -87,7 +87,7 @@ class StreamingPercentile(object):
         n = self.positions
         q = self.markers
 
-        return d/(n[i+1] - n[i-1]) * ((n[i] - n[i-1] + d) * ((q[i+1] - q[i]) /(n[i+1] - n[i])) + (n[i+1] - n[i] - d) * ((q[i] - q[i-1])/(n[i] - n[i-1])))
+        return d / (n[i+1] - n[i-1]) * ((n[i] - n[i-1] + d) * ((q[i+1] - q[i]) / (n[i+1] - n[i])) + (n[i+1] - n[i] - d) * ((q[i] - q[i-1]) / (n[i] - n[i-1])))
            
     def desired_marker_positions(self):
         return map(self.desired_marker_position, range(5))
