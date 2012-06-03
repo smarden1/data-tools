@@ -1,4 +1,4 @@
-import Exceptions
+import datatools.Exceptions
 
 # http://www.cs.wustl.edu/~jain/papers/ftp/psqr.pdf
 # TODO - think about trying length of markers to 11 or 21 or 101 - abstract out desired_marker_positions_generator
@@ -57,7 +57,7 @@ class StreamingPercentile(object):
                 self.full_markers.sort()
                 self.full_markers = True
         else:
-            
+
             for i, m in enumerate(self.markers):
                if data_point >= m:
                    self.positions[i] += 1
@@ -95,7 +95,7 @@ class StreamingPercentile(object):
     def desired_marker_position(self, index):
         return self.desired_marker_positions_generator[index]()            
 
-    
+
 # put somewhere else
 def window(iterable, n):
     """takes an iterable and a number and returns a sliding buffer"""

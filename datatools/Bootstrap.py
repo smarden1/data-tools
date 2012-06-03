@@ -1,5 +1,5 @@
 import random
-from FrequencyBase import FrequencyBase
+from datatools.FrequencyBase import FrequencyBase
 
 class BootStrap(object):
 

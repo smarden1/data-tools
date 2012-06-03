@@ -1,4 +1,4 @@
-import Moments
+import datatools.Moments
 
 class StreamingMoments(Moments.Moments):
 

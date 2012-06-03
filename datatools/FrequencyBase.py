@@ -1,9 +1,9 @@
 from abc import ABCMeta, abstractmethod
 import math
-import Moments
+import datatools.Moments
 
 class FrequencyBase(Moments.Moments):
-    
+
     __metaclass__ = ABCMeta
 
     def __init__(self):
@@ -12,10 +12,10 @@ class FrequencyBase(Moments.Moments):
         self.max = None
         self.min = float("inf")
         self.is_sorted = False
-        
+
     def firstQuartile(self):
         return self.percentile(.25)
-    
+
     def median(self):
         return self.percentile(.5)
 

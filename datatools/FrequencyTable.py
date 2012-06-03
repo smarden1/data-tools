@@ -1,6 +1,6 @@
 ﻿import collections
 import Exceptions
-from FrequencyBase import FrequencyBase
+from datatools.FrequencyBase import FrequencyBase
 
 class FrequencyTable(object):
 
@@ -32,7 +32,7 @@ class FrequencyTable(object):
             c += v    
             if c >= p:
                 return k
-            
+
         return k
 
     def mode(self):
@@ -64,5 +64,5 @@ class FrequencyTable(object):
     def optimumBinWidth(self):
         """Freedman–Diaconis' choice"""
         return 2 * (self.IQR() / pow(self.n, 1/3.))
-    
+
 FrequencyBase.register(FrequencyTable)

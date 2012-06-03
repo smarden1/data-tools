@@ -1,6 +1,5 @@
 import math
 
-
 class Moments(object):
 
     def mean(self):
@@ -18,4 +17,3 @@ class Moments(object):
     # http://www.ats.ucla.edu/stat/mult_pkg/faq/general/kurtosis.htm    
     def kurtosis(self):
         return ((self.moments(4) - (self.mean ** 4)) / self.n) / ((self.variance / n) ** 2) - 3
-
