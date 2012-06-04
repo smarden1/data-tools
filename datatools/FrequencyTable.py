@@ -11,7 +11,7 @@ class FrequencyTable(FrequencyBase):
     # cl tools casts this to int
     def add(self, key, count = 1):
         self.data[key] += count
-        self.total += count
+        self.total += key * count
         self.n += 1
         self.max = max(self.max, key)
         self.min = min(self.min, key)
@@ -29,20 +29,20 @@ class FrequencyTable(FrequencyBase):
         c = 0
 
         for k,v in self.ordered_data().iteritems():
-            c += v    
+            c += v
             if c >= p:
                 return k
 
         return k
 
     def mode(self):
-        return max(self.data.iteritems(), key = lambda a:a[1])
+        return max(self.data.iteritems(), key = lambda a:a[1])[0]
 
     def ordered_data(self):
         if not self.is_sorted:
-            self.data = sorted(self.data.iteritems(), key = lambda a: a[0])
+            self.ordered_data = sorted(self.data.iteritems(), key = lambda a: a[0])
             self.is_sorted = True
-        return self.data
+        return self.ordered_data
 
     def explode(self):
         for k,v in self.ordered_data():
