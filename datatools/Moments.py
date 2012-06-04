@@ -1,6 +1,10 @@
+from abc import ABCMeta, abstractmethod
 import math
 
+# should make this abstract
 class Moments(object):
+
+    __metaclass__ = ABCMeta
 
     def mean(self):
         return self.moments(1) / self.n
@@ -17,3 +21,7 @@ class Moments(object):
     # http://www.ats.ucla.edu/stat/mult_pkg/faq/general/kurtosis.htm    
     def kurtosis(self):
         return ((self.moments(4) - (self.mean ** 4)) / self.n) / ((self.variance / n) ** 2) - 3
+
+    @abstractmethod
+    def moment(self, m):
+        pass
