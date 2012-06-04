@@ -2,7 +2,7 @@ import math
 from datatools.FrequencyBase import FrequencyBase
 from collections import namedtuple
 
-class FrequencyArray(object):
+class FrequencyArray(FrequencyBase):
 
     def __init__(self, data = None, is_sorted = False, **kwargs):
         self.data = data or []
@@ -66,5 +66,3 @@ class FrequencyArray(object):
 
         # edge case of last being most common
         return f(max_pair, current_pair).key
-
-FrequencyBase.register(FrequencyArray)

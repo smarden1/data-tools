@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 import math
 import datatools.Moments
 
-class FrequencyBase(Moments.Moments):
+class FrequencyBase(datatools.Moments.Moments):
 
     __metaclass__ = ABCMeta
 
