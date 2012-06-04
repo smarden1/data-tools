@@ -2,11 +2,11 @@
 import Exceptions
 from datatools.FrequencyBase import FrequencyBase
 
-class FrequencyTable(object):
+class FrequencyTable(FrequencyBase):
 
     def __init__(self):
+        super(FrequencyTable, self).__init__() # how to call super with abstractbase
         self.data = collections.defaultdict(lambda : 0)
-        super.__init__()
 
     # cl tools casts this to int
     def add(self, key, count = 1):
@@ -40,7 +40,7 @@ class FrequencyTable(object):
 
     def ordered_data(self):
         if not self.is_sorted:
-            self.data = sorted(self.data, key = lambda a: a[0])
+            self.data = sorted(self.data.iteritems(), key = lambda a: a[0])
             self.is_sorted = True
         return self.data
 
@@ -64,5 +64,3 @@ class FrequencyTable(object):
     def optimumBinWidth(self):
         """Freedman–Diaconis' choice"""
         return 2 * (self.IQR() / pow(self.n, 1/3.))
-
-FrequencyBase.register(FrequencyTable)
