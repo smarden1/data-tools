@@ -70,9 +70,6 @@ class TestFrequencyTable(unittest.TestCase):
     def test_last_percentile(self):
         self.assertEqual(self.range_ft.percentile(1), 10)
 
-#    def test_interquartile_range(self):
-#        self.assertEqual(self.ICR(), 1)
-
     def test_first_quantile(self):
         self.assertEqual(self.range_ft.firstQuartile(), 3)
 
@@ -80,7 +77,7 @@ class TestFrequencyTable(unittest.TestCase):
         self.assertEqual(self.range_ft.thirdQuartile(), 8)
 
     def test_interquartile_range(self):
-        self.assertEqual(self.range_ft.IQR(), 5)
+        self.assertEqual(self.range_ft.iqr(), 5)
 
     def test_adding_counts(self):
         self.empty_ft.add(1, 5)
