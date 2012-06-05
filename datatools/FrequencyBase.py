@@ -31,6 +31,11 @@ class FrequencyBase(datatools.Moments.Moments):
     def mean(self):
         return self.average()
 
+    def range(self, zero_start = False):
+        if zero_start:
+            return self.max
+        return self.max - self.min
+
     @abstractmethod
     def percentile(self, percentile):
         pass
