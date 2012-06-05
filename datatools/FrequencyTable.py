@@ -7,12 +7,13 @@ class FrequencyTable(FrequencyBase):
     def __init__(self):
         super(FrequencyTable, self).__init__() # how to call super with abstractbase
         self.data = collections.defaultdict(lambda : 0)
+        self.ordered_data_list = []
 
     # cl tools casts this to int
     def add(self, key, count = 1):
         self.data[key] += count
         self.total += key * count
-        self.n += 1
+        self.n += count
         self.max = max(self.max, key)
         self.min = min(self.min, key)
         self.is_sorted = False
@@ -28,7 +29,7 @@ class FrequencyTable(FrequencyBase):
         p = percentile * self.total
         c = 0
 
-        for k,v in self.ordered_data().iteritems():
+        for k,v in self.ordered_data():
             c += v
             if c >= p:
                 return k
@@ -40,9 +41,9 @@ class FrequencyTable(FrequencyBase):
 
     def ordered_data(self):
         if not self.is_sorted:
-            self.ordered_data = sorted(self.data.iteritems(), key = lambda a: a[0])
+            self.ordered_data_list = sorted(self.data.iteritems(), key = lambda a: a[0])
             self.is_sorted = True
-        return self.ordered_data
+        return self.ordered_data_list
 
     def explode(self):
         for k,v in self.ordered_data():
