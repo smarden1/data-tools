@@ -26,7 +26,7 @@ class FrequencyTable(FrequencyBase):
         if percentile > 1.0:
             raise PercentageGreaterThanOne(percentile)
 
-        p = percentile * self.total
+        p = percentile * self.n
         c = 0
 
         for k,v in self.ordered_data():

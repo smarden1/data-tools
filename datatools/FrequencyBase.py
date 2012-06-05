@@ -23,7 +23,7 @@ class FrequencyBase(datatools.Moments.Moments):
         return self.percentile(.75)
 
     def IQR(self):
-        return thirdQuartile() - firstQuartile()
+        return self.thirdQuartile() - self.firstQuartile()
 
     def average(self):
         return self.total / self.n
