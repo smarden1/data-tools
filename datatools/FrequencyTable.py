@@ -50,18 +50,12 @@ class FrequencyTable(FrequencyBase):
             for i in xrange(v):
                 yield k
 
-# move these and lower to frequency of something math based and subclasses
-#stem and leaf plot
-#sparklines on cl
+    # this is better than the explode_data version for the table
     def histogram(self, bins = None):
-        if bins:
-            bin_width = math.ceil(self.max / float(bins))
-        else:
-            bin_width = optimumBinWidth()
-            bins = math.floor(self.max / bin_width)
-        
-        # and more!
+        bins, bin_width = self.__histogram_bins_and_width(bins)
 
-    def optimumBinWidth(self):
-        """Freedman–Diaconis' choice"""
-        return 2 * (self.IQR() / pow(self.n, 1/3.))
+        histogram = [0] * bins
+        for k,v in self.ordered_data():
+            histogram[k / bin_width] += v
+
+        return histogram
