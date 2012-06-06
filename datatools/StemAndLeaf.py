@@ -1,17 +1,26 @@
-
+import math
 
 class StemAndLeaf(object):
 
     def __init__(self, data, granularity = 10):
         self.data = data
-        self.granularity = granularity
-        self.result = [[self.granularity * i] for i in self.data.range]
+        self.granularity = float(granularity)
 
     def result(self):
-        for i, v in enumerate(self.data.ordered_data()):
-            yield self.result[v / self.granularity][1].append(v - i * self.granularity)
+        results = self.__initiateRange()
+
+        for i, v in enumerate(self.data.explode()):
+            index = int(math.floor(v / self.granularity))
+            results[index].append(v - index)
+
+        return results
+
+    def __initiateRange(self):
+        r = int(math.ceil(self.data.range() / self.granularity))
+
+        return [[i * self.granularity] for i in xrange(r)]
 
     def prettyPrint(self):
-        for k,v in self.result():
-            print k + " | " + " ".join(v)
+        for i in self.result():
+            print "%s"%(i[0]) + " | " + " ".join(map(str, i[1::]))
             
