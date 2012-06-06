@@ -26,6 +26,9 @@ class SparkLines(object):
     def result(self):
         return (self.getBar(i) for i in self.data.explode())
 
+    def prettyPrint(self):
+        print "".join(self.result())
+
     def getBar(self, value):
         i = int(math.floor((value - self.data.min) / self.bin_size))
         return self.bars[i]
