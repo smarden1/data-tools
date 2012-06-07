@@ -24,10 +24,10 @@ class SparkLines(object):
         self.bin_size = math.ceil(self.data.range(zero_start) / self.range) + 1
 
     def result(self):
-        return (self.getBar(i) for i in self.data.explode()) # maybe not explode here
+        return (self.getBar(i) for i in self.data.data)
 
     def prettyPrint(self):
-        print "".join(self.result())
+        return "".join(self.result())
 
     def getBar(self, value):
         i = int(math.floor((value - self.data.min) / self.bin_size))

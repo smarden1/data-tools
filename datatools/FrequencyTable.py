@@ -45,6 +45,12 @@ class FrequencyTable(FrequencyBase):
             self.is_sorted = True
         return self.ordered_data_list
 
+    def ordered_keys(self):
+        return map(lambda a: a[0], self.ordered_data())
+
+    def ordered_values(self):
+        return map(lambda a: a[1], self.ordered_data())
+
     def explode(self):
         for k,v in self.ordered_data():
             for i in xrange(v):

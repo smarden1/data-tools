@@ -1,4 +1,6 @@
 from datatools.FrequencyTable import FrequencyTable
+from datatools.FrequencyArray import FrequencyArray
+from datatools.SparkLines import SparkLines
 import math
 
 class Histogram(FrequencyTable):
@@ -29,3 +31,7 @@ class Histogram(FrequencyTable):
             self.ordered_data_list = [(self.bin_key_to_value(i), self.data[i]) for i in xrange(self.max_bin_key + 1)]
             self.is_sorted = True
         return self.ordered_data_list
+
+    def spark_line(self):
+        s = SparkLines(FrequencyArray(self.ordered_values()))
+        return s.prettyPrint()
