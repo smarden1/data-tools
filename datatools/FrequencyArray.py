@@ -27,7 +27,6 @@ class FrequencyArray(FrequencyBase):
 
         for i in xrange(count):
             self.data.append(key)
-            
 
     def ordered_data(self):
         if not self.is_sorted:
@@ -48,17 +47,29 @@ class FrequencyArray(FrequencyBase):
         return self.ordered_data()[p]
 
     def explode(self):
-        for i in self.ordered_data:
+        for i in self.ordered_data():
             yield i
+
+    def condensed(self):
+        current = (self.ordered_data()[0], 1)
+
+        for i in self.ordered_data()[1::]:
+            if i == current[0]:
+                current[1] += 1
+            else:
+                yield current
+                current = (i, 1)
+
+        yield current
 
     def mode(self):
         Pair = namedtuple("Pair", "key value")
         f = lambda k,v : max(k, v, key = lambda a: a.value)
 
-        current_pair = Pair(self.ordered_data[0], 1)
+        current_pair = Pair(self.ordered_data()[0], 1)
         max_pair = current_pair
 
-        for i in self.ordered_data[1:]:
+        for i in self.ordered_data()[1:]:
             if i != current_pair.key:
                 max_pair = f(max_pair, current_pair)
                 current_pair = Pair(i, 1)

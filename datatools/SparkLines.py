@@ -24,7 +24,7 @@ class SparkLines(object):
         self.bin_size = math.ceil(self.data.range(zero_start) / self.range) + 1
 
     def result(self):
-        return (self.getBar(i) for i in self.data.explode())
+        return (self.getBar(i) for i in self.data.explode()) # maybe not explode here
 
     def prettyPrint(self):
         print "".join(self.result())

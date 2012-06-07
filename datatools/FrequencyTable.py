@@ -5,7 +5,7 @@ from datatools.FrequencyBase import FrequencyBase
 class FrequencyTable(FrequencyBase):
 
     def __init__(self):
-        super(FrequencyTable, self).__init__() # how to call super with abstractbase
+        super(FrequencyTable, self).__init__()
         self.data = collections.defaultdict(lambda : 0)
         self.ordered_data_list = []
 
@@ -50,12 +50,6 @@ class FrequencyTable(FrequencyBase):
             for i in xrange(v):
                 yield k
 
-    # this is better than the explode_data version for the table
-    def histogram(self, bins = None):
-        bins, bin_width = self.__histogram_bins_and_width(bins)
-
-        histogram = [0] * bins
-        for k,v in self.ordered_data():
-            histogram[k / bin_width] += v
-
-        return histogram
+    def condensed(self):
+        for i in self.ordered_data():
+            yield i

@@ -49,6 +49,10 @@ class FrequencyBase(datatools.Moments.Moments):
         pass
 
     @abstractmethod
+    def condensed(self):
+        pass
+
+    @abstractmethod
     def mode(self):
         pass
 
@@ -68,23 +72,14 @@ class FrequencyBase(datatools.Moments.Moments):
         return cdf
 
     def optimumBinWidth(self):
-    """Freedman–Diaconis' choice"""
+        """Freedman–Diaconis choice"""
         return 2 * (self.iqr() / pow(self.n, 1/3.))
 
-    def __histogram_bins_and_width(self, bins = None):
-        if bins:
-            bin_width = math.ceil(self.max / float(bins))
-        else:
-            bin_width = int(math.floor(optimumBinWidth()))
-            bins = math.floor(self.max / bin_width)
+    def histogram(self, bin_width = None):
+        bin_width = bin_width or self.optimumBinWidth()
 
-        return bins, bins_width
-
-    def histogram(self, bins = None):
-        bins, bin_width = self.__histogram_bins_and_width(bins)
-
-        histogram = [0] * bins
-        for i in self.explode_data():
-            histogram[i / bin_width] += 1
+        histogram = Histogram(bin_width)
+        for k,v in self.condensed():
+            histogram.add(k, v)
 
         return histogram
