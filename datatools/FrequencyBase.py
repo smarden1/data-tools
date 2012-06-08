@@ -1,8 +1,9 @@
 from abc import ABCMeta, abstractmethod
 import math
-import datatools.Moments
+import Moments from datatools.Moments
+import Percentiles from datatools.Percentiles
 
-class FrequencyBase(datatools.Moments.Moments):
+class FrequencyBase(Moments, Percentiles):
 
     __metaclass__ = ABCMeta
 
@@ -13,28 +14,17 @@ class FrequencyBase(datatools.Moments.Moments):
         self.min = float("inf")
         self.is_sorted = False
 
-    def firstQuartile(self):
-        return self.percentile(.25)
-
-    def median(self):
-        return self.percentile(.5)
-
-    def thirdQuartile(self):
-        return self.percentile(.75)
-
-    def iqr(self):
-        return self.thirdQuartile() - self.firstQuartile()
-
-    def average(self):
-        return self.total / self.n
-
     def mean(self):
-        return self.average()
+        return self.total / self.n
 
     def range(self, zero_start = False):
         if zero_start:
             return self.max
         return self.max - self.min
+
+    @abstractmethod
+    def mode(self):
+        pass
 
     @abstractmethod
     def percentile(self, percentile):
@@ -55,10 +45,6 @@ class FrequencyBase(datatools.Moments.Moments):
     def condensedData(self):
         for k,v in self.condensed():
             yield v
-
-    @abstractmethod
-    def mode(self):
-        pass
 
     def moment(self, n):
         return sum(i ** n for i in self.explode())

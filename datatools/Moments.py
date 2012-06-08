@@ -9,6 +9,9 @@ class Moments(object):
     def mean(self):
         return self.moments(1) / self.n
 
+    def average(self):
+        return self.mean()
+
     def variance(self):
         return (self.moments(2)) - (self.mean() ** 2)
 
