@@ -17,7 +17,6 @@ class FrequencyArray(FrequencyBase):
             self.total = kwargs.get("total", 0)
             self.max = kwargs.get("max", None)
             self.min = kwargs.get("min", float("inf"))
-        
 
     def add(self, key, count = 1):
         self.max = max(self.max, key)

@@ -33,5 +33,5 @@ class Histogram(FrequencyTable):
         return self.orderedData_list
 
     def spark_line(self):
-        s = SparkLines(FrequencyArray(self.ordered_values()))
+        s = SparkLines(FrequencyArray(self.ordered_values(), True))
         return s.prettyPrint()
