@@ -1,7 +1,7 @@
 import random
 from datatools.FrequencyBase import FrequencyBase
-from datatools.StreamingMoments import StreamingMoments
 from datatools.FrequencyArray import FrequencyArray
+from datatools.FrequencyTable import FrequencyTable
 
 class BootStrap(object):
 
@@ -34,7 +34,7 @@ class BootStrap(object):
         return (freq_array.percentile(.5 - self.ci), freq_array.percentile(.5 + self.ci))
 
     def run_sample_statistics(self):
-        moments = StreamingMoments() # see if i can attach streamingMoment to same object
+        moments = FrequencyTable() # add option to make this and streaming
 
         for i in range(self.sample_size):
             for j in self.random_with_replacement():
