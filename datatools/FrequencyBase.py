@@ -64,13 +64,13 @@ class FrequencyBase(datatools.Moments.Moments):
         return sum(i ** n for i in self.explode())
 
     def pdf(self):
-        return ((k, v / self.total) for k,v in self.orderedData().iteritems())
+        return dict((k, v / self.n) for k,v in self.condensed())
 
     def cdf(self):
         cdf, current = {}, 0
 
-        for k,v in self.pdf():
-            current += v
+        for k,v in self.condensed():
+            current += (v / self.n)
             cdf[k] = current
 
         return cdf

@@ -92,5 +92,11 @@ class TestFrequencyTable(unittest.TestCase):
         self.assertEquals(self.empty_ft.data, {1:5})
         self.assertEquals(empty_2.data, {1:5})
 
+    def test_pdf(self):
+        self.assertEquals(self.bucketed.pdf(), {1:1/6.,2:2/6.,3:.5})
+
+    def test_cdf(self):
+        self.assertEquals(self.bucketed.cdf(), {1:1/6.,2:3/6.,3:1})
+
 if __name__ == "__main__":
     unittest.main()
