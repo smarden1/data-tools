@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 import math
-import Moments from datatools.Moments
-import Percentiles from datatools.Percentiles
+from datatools.Moments import Moments
+from datatools.Percentiles import Percentiles
 
 class FrequencyBase(Moments, Percentiles):
 
