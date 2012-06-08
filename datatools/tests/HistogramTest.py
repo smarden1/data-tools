@@ -48,14 +48,14 @@ class TestHistogram(unittest.TestCase):
         for i in range(10, 0, -1):
             histogram.add(i)
 
-        self.assertEqual(histogram.ordered_data(), [(0,1), (2,2), (4,2), (6,2), (8,2), (10,1)])
+        self.assertEqual(histogram.orderedData(), [(0,1), (2,2), (4,2), (6,2), (8,2), (10,1)])
 
     def test_histogram_bucket_width_of_three(self):
         histogram = Histogram(3)
         for i in range(10, 0, -1):
             histogram.add(i)
 
-        self.assertEqual(histogram.ordered_data(), [(0,2), (3,3), (6,3), (9,2)])
+        self.assertEqual(histogram.orderedData(), [(0,2), (3,3), (6,3), (9,2)])
 
 if __name__ == "__main__":
     unittest.main()

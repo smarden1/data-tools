@@ -41,7 +41,7 @@ class FrequencyBase(datatools.Moments.Moments):
         pass
 
     @abstractmethod
-    def ordered_data(self):
+    def orderedData(self):
         pass
 
     @abstractmethod
@@ -64,7 +64,7 @@ class FrequencyBase(datatools.Moments.Moments):
         return sum(i ** n for i in self.explode())
 
     def pdf(self):
-        return ((k, v / self.total) for k,v in self.ordered_data().iteritems())
+        return ((k, v / self.total) for k,v in self.orderedData().iteritems())
 
     def cdf(self):
         cdf, current = {}, 0

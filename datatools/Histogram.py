@@ -26,11 +26,11 @@ class Histogram(FrequencyTable):
     def bin_key_to_value(self, key):
         return int(key * self.bin_width)
 
-    def ordered_data(self):
+    def orderedData(self):
         if not self.is_sorted:
-            self.ordered_data_list = [(self.bin_key_to_value(i), self.data[i]) for i in xrange(self.max_bin_key + 1)]
+            self.orderedData_list = [(self.bin_key_to_value(i), self.data[i]) for i in xrange(self.max_bin_key + 1)]
             self.is_sorted = True
-        return self.ordered_data_list
+        return self.orderedData_list
 
     def spark_line(self):
         s = SparkLines(FrequencyArray(self.ordered_values()))

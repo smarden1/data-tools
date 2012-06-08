@@ -7,7 +7,7 @@ class FrequencyTable(FrequencyBase):
     def __init__(self):
         super(FrequencyTable, self).__init__()
         self.data = collections.defaultdict(lambda : 0)
-        self.ordered_data_list = []
+        self.orderedData_list = []
 
     # cl tools casts this to int
     def add(self, key, count = 1):
@@ -29,7 +29,7 @@ class FrequencyTable(FrequencyBase):
         p = percentile * self.n
         c = 0
 
-        for k,v in self.ordered_data():
+        for k,v in self.orderedData():
             c += v
             if c >= p:
                 return k
@@ -39,23 +39,23 @@ class FrequencyTable(FrequencyBase):
     def mode(self):
         return max(self.data.iteritems(), key = lambda a:a[1])[0]
 
-    def ordered_data(self):
+    def orderedData(self):
         if not self.is_sorted:
-            self.ordered_data_list = sorted(self.data.iteritems(), key = lambda a: a[0])
+            self.orderedData_list = sorted(self.data.iteritems(), key = lambda a: a[0])
             self.is_sorted = True
-        return self.ordered_data_list
+        return self.orderedData_list
 
     def ordered_keys(self):
-        return map(lambda a: a[0], self.ordered_data())
+        return map(lambda a: a[0], self.orderedData())
 
     def ordered_values(self):
-        return map(lambda a: a[1], self.ordered_data())
+        return map(lambda a: a[1], self.orderedData())
 
     def explode(self):
-        for k,v in self.ordered_data():
+        for k,v in self.orderedData():
             for i in xrange(v):
                 yield k
 
     def condensed(self):
-        for i in self.ordered_data():
+        for i in self.orderedData():
             yield i
