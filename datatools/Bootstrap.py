@@ -14,7 +14,9 @@ class BootStrap(object):
         self.ci = float(kwargs.get("ci", .025))
 
         self.functions = args or ["mean"]
-        self.function_results = [FrequencyArray()) for i in self.functions]
+        self.function_results = [FrequencyArray() for i in self.functions]
+
+        self.frequency = frequency
 
         if kwargs.has_key("seed"):
             random.seed(kwargs.get("seed"))
@@ -34,8 +36,9 @@ class BootStrap(object):
     def run_sample_statistics(self):
         moments = StreamingMoments() # see if i can attach streamingMoment to same object
 
-        for i in self.sample_size:
-            moments.add(self.random_with_replacement())
+        for i in range(self.sample_size):
+            for j in self.random_with_replacement():
+                moments.add(j)
 
         return map(lambda a: getattr(moments, a)(), self.functions)
 
