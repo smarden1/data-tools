@@ -12,7 +12,8 @@ class FrequencyBase(Moments, Percentiles):
         self.n = 0.
         self.max = None
         self.min = float("inf")
-        self.is_sorted = False
+        self.cumulative_data_list = []
+        self.resetFlags()
 
     def __str__(self):
         return "%s n, %s total, %s min, %s max"%(self.n, self.total, self.min, self.max)
@@ -43,16 +44,26 @@ class FrequencyBase(Moments, Percentiles):
             return self.max
         return self.max - self.min
 
+    def resetFlags(self):
+        self.is_sorted = False
+        self.is_cumulative = False
+
     @abstractmethod
     def mode(self):
         pass
 
     @abstractmethod
     def percentile(self, percentile):
+        #return bisect.bisect_left(self.ordered_data)
+        # make this a custom bisect b/c of this data[bisect.bisect_left(map(lambda a:a[1],data), 70)][0]
         pass
 
     @abstractmethod
     def orderedData(self):
+        pass
+
+    @abstractmethod
+    def cumulative_ordered_data(self):
         pass
 
     @abstractmethod
@@ -93,3 +104,13 @@ class FrequencyBase(Moments, Percentiles):
             histogram.add(k, v)
 
         return histogram
+
+    def runningSum(self, data):
+        # data should be [[0, 1], [1, 10]] in order
+
+        running_sum = [0] # this is really hacky but necessary b/c += on an int returns a new int
+        def getRunningSum(val):
+            running_sum[0] += val
+            return running_sum[0]
+
+        return [[k, getRunningSum(v)] for k, v in data]

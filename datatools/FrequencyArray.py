@@ -23,6 +23,7 @@ class FrequencyArray(FrequencyBase):
         self.min = min(self.min, key)
         self.n += count
         self.total += (key * count)
+        self.resetFlags()
 
         for i in xrange(count):
             self.data.append(key)
@@ -31,7 +32,14 @@ class FrequencyArray(FrequencyBase):
         if not self.is_sorted:
             self.data.sort()
             self.is_sorted = True
+            self.is_cumulative = False
         return self.data
+
+    def cumulative_ordered_data(self):
+        if not self.is_cumulative:
+            self.cumulative_ordered_data_list = self.runningSum(self.ordered_data())
+            self.is_cumulative = True
+        return cumulative_ordered_data_list
 
     def percentile(self, percentile):
         """

@@ -16,7 +16,7 @@ class FrequencyTable(FrequencyBase):
         self.n += count
         self.max = max(self.max, key)
         self.min = min(self.min, key)
-        self.is_sorted = False
+        self.resetFlags()
 
     def percentile(self, percentile):
         """
@@ -39,11 +39,18 @@ class FrequencyTable(FrequencyBase):
     def mode(self):
         return max(self.data.iteritems(), key = lambda a:a[1])[0]
 
+    def cumulative_ordered_data(self):
+        if not self.is_cumulative:
+            self.cumulative_ordered_data_list = self.runningSum(self.ordered_data())
+            self.is_cumulative = True
+        return cumulative_ordered_data_list
+
     def orderedData(self):
         if not self.is_sorted:
             self.orderedData_list = sorted(self.data.iteritems(), key = lambda a: a[0])
             self.is_sorted = True
-        return self.orderedData_list
+            self.is_cumulative = False
+        return self.ordered_data_list
 
     def ordered_keys(self):
         return map(lambda a: a[0], self.orderedData())
