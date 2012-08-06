@@ -14,6 +14,27 @@ class FrequencyBase(Moments, Percentiles):
         self.min = float("inf")
         self.is_sorted = False
 
+    def __str__(self):
+        return "%s n, %s total, %s min, %s max"%(self.n, self.total, self.min, self.max)
+
+    def __repr__(self):
+        return self.__str__
+
+    def firstQuartile(self):
+        return self.percentile(.25)
+
+    def median(self):
+        return self.percentile(.5)
+
+    def thirdQuartile(self):
+        return self.percentile(.75)
+
+    def iqr(self):
+        return self.thirdQuartile() - self.firstQuartile()
+
+    def average(self):
+        return self.total / self.n
+
     def mean(self):
         return self.total / self.n
 
