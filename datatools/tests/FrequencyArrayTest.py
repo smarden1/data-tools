@@ -26,7 +26,7 @@ class TestEmptyFrequencyArray(unittest.TestCase):
         self.assertEqual(self.empty_fa.data, [1, 1, 3])
 
     def testOrderedData(self):
-        self.assertEqual(self.ranged_fa.ordered_data(), range(1, 11))
+        self.assertEqual(self.ranged_fa.orderedData(), range(1, 11))
 
     def testMax(self):
         self.assertEqual(self.ranged_fa.max, 10)

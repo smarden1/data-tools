@@ -7,7 +7,7 @@ class FrequencyTable(FrequencyBase):
     def __init__(self):
         super(FrequencyTable, self).__init__()
         self.data = collections.defaultdict(lambda : 0)
-        self.orderedData_list = []
+        self.cumulative_ordered_data_list = []
 
     # cl tools casts this to int
     def add(self, key, count = 1):
@@ -47,7 +47,7 @@ class FrequencyTable(FrequencyBase):
 
     def orderedData(self):
         if not self.is_sorted:
-            self.orderedData_list = sorted(self.data.iteritems(), key = lambda a: a[0])
+            self.ordered_data_list = sorted(self.data.iteritems(), key = lambda a: a[0])
             self.is_sorted = True
             self.is_cumulative = False
         return self.ordered_data_list

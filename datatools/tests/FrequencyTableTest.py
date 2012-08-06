@@ -31,10 +31,10 @@ class TestFrequencyTable(unittest.TestCase):
         self.assertEqual(self.empty_ft.data, {1:2, 3:1})
 
     def testOrderedData(self):
-        self.assertEqual(self.range_ft.ordered_data(), [(1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1)])
+        self.assertEqual(self.range_ft.orderedData(), [(1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1)])
 
     def testOrderedDataBucketed(self):
-        self.assertEqual(self.bucketed.ordered_data(), [(1,1), (2,2), (3,3)])
+        self.assertEqual(self.bucketed.orderedData(), [(1,1), (2,2), (3,3)])
 
     def testMax(self):
         self.assertEqual(self.range_ft.max, 10)
