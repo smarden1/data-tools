@@ -15,71 +15,71 @@ class TestFrequencyTable(unittest.TestCase):
         self.bucketed.add(2, 2)
         self.bucketed.add(3, 3)
 
-    def test_no_data_to_start(self):
+    def testNoDataToStart(self):
         self.assertEqual(self.empty_ft.data, {})
 
-    def test_add_data(self):
+    def testAddData(self):
         self.empty_ft.add(1)
         self.empty_ft.add(3)
 
         self.assertEqual(self.empty_ft.data, {1:1, 3:1})
 
-    def test_add_data_with_counts(self):
+    def testAddDataWithCounts(self):
         self.empty_ft.add(1, 2)
         self.empty_ft.add(3)
 
         self.assertEqual(self.empty_ft.data, {1:2, 3:1})
 
-    def test_orderedData(self):
-        self.assertEqual(self.range_ft.orderedData(), [(1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1)])
+    def testOrderedData(self):
+        self.assertEqual(self.range_ft.ordered_data(), [(1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1)])
 
-    def test_orderedData_bucketed(self):
-        self.assertEqual(self.bucketed.orderedData(), [(1,1), (2,2), (3,3)])
+    def testOrderedDataBucketed(self):
+        self.assertEqual(self.bucketed.ordered_data(), [(1,1), (2,2), (3,3)])
 
-    def test_max(self):
+    def testMax(self):
         self.assertEqual(self.range_ft.max, 10)
 
-    def test_min(self):
+    def testMin(self):
         self.assertEqual(self.range_ft.min, 1)
 
-    def test_average(self):
+    def testAverage(self):
         self.assertEqual(self.bucketed.mean(), 14/6.)
 
-    def test_mode_with_obvious_mode(self):
+    def testModeWithObviousMode(self):
         self.assertEqual(self.bucketed.mode(), 3)
 
-    def test_mode_with_no_mode(self):
+    def testModeWithNoMode(self):
         # first item
         self.assertEqual(self.range_ft.mode(), 1)
 
-    def test_exploded_data(self):
+    def testExplodedData(self):
         exploded = [i for i in self.bucketed.explode()]
         self.assertEqual(exploded, [1,2,2,3,3,3])
 
-    def test_median_uneven(self):
+    def testMedianUneven(self):
         self.bucketed.add(1)
         self.assertEqual(self.bucketed.median(), 2)
 
-    def test_median_even(self):
+    def testMedianEven(self):
         self.assertEqual(self.bucketed.median(), 2)
         self.assertEqual(self.range_ft.median(), 5)
 
-    def test_first_percentile(self):
+    def testFirstPercentile(self):
         self.assertEqual(self.range_ft.percentile(0), 1)
 
-    def test_last_percentile(self):
+    def testLastPercentile(self):
         self.assertEqual(self.range_ft.percentile(1), 10)
 
-    def test_first_quantile(self):
+    def testFirstQuantile(self):
         self.assertEqual(self.range_ft.firstQuartile(), 3)
 
-    def test_third_quantile(self):
+    def testThirdQuantile(self):
         self.assertEqual(self.range_ft.thirdQuartile(), 8)
 
-    def test_interquartile_range(self):
+    def testInterquartileRange(self):
         self.assertEqual(self.range_ft.iqr(), 5)
 
-    def test_adding_counts(self):
+    def testAddingCounts(self):
         self.empty_ft.add(1, 5)
 
         empty_2 = FrequencyTable()

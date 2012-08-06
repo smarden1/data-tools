@@ -15,42 +15,42 @@ class TestHistogram(unittest.TestCase):
             self.ranged_ft.add(i)
             self.expected_all[i] = 1
 
-    def test_range_to_histogram(self):
+    def testRangeToHistogram(self):
         histogram = Histogram(1)
         for i in range(10, 0, -1):
             histogram.add(i)
 
         self.assertEqual(histogram.data, self.expected_all)
 
-    def test_array_to_histogram(self):
+    def testArrayToHistogram(self):
         histogram = Histogram(1)
         for i in self.ranged_fa.explode():
             histogram.add(i)
 
         self.assertEqual(histogram.data, self.expected_all)
 
-    def test_table_to_histogram(self):
+    def testTableToHistogram(self):
         histogram = Histogram(1)
         for i in self.ranged_ft.explode():
             histogram.add(i)
 
         self.assertEqual(histogram.data, self.expected_all)
 
-    def test_histogram_bucket_width_of_two(self):
+    def testHistogramBucketWidthOfTwo(self):
         histogram = Histogram(2)
         for i in range(10, 0, -1):
             histogram.add(i)
 
         self.assertEqual(histogram.data, {0:1, 1:2, 2:2, 3:2, 4:2, 5:1})
 
-    def test_histogram_bucket_width_of_two(self):
+    def testHistogramBucketWidthOfTwo(self):
         histogram = Histogram(2)
         for i in range(10, 0, -1):
             histogram.add(i)
 
         self.assertEqual(histogram.orderedData(), [(0,1), (2,2), (4,2), (6,2), (8,2), (10,1)])
 
-    def test_histogram_bucket_width_of_three(self):
+    def testHistogramBucketWidthOfThree(self):
         histogram = Histogram(3)
         for i in range(10, 0, -1):
             histogram.add(i)
