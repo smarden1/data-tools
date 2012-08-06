@@ -23,6 +23,12 @@ class SparkLines(object):
         self.data = data
         self.bin_size = math.ceil(self.data.range(zero_start) / self.range) + 1
 
+    def __str__(self):
+        return self.prettyPrint()
+
+    def __repr__(self):
+        return self.__str__()
+
     def result(self):
         return (self.getBar(i) for i in self.data.data)
 

@@ -35,7 +35,7 @@ class FrequencyArray(FrequencyBase):
 
     def percentile(self, percentile):
         """
-            takes a percentoile
+            takes a percentile
             returns the key for that percentile
         """
         if percentile > 1.0:
