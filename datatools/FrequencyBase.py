@@ -53,13 +53,6 @@ class FrequencyBase(Moments, Percentiles):
     def mode(self):
         pass
 
-    def percentile(self, percentile):
-        if percentile > 1.0:
-            raise PercentageGreaterThanOne(percentile)
-
-        data = self.cdf()
-        return data[bisect_left(map(lambda a:a[1], data), percentile)][0]
-
     @abstractmethod
     def orderedData(self):
         pass
@@ -79,6 +72,13 @@ class FrequencyBase(Moments, Percentiles):
     def condensedData(self):
         for k,v in self.condensed():
             yield v
+
+    def percentile(self, percentile):
+        if percentile > 1.0:
+            raise PercentageGreaterThanOne(percentile)
+
+        data = self.cdf()
+        return data[bisect_left(map(lambda a:a[1], data), percentile)][0]
 
     def moment(self, n):
         return sum(i ** n for i in self.explode())
