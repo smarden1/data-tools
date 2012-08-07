@@ -41,9 +41,9 @@ class FrequencyTable(FrequencyBase):
 
     def cumulative_ordered_data(self):
         if not self.is_cumulative:
-            self.cumulative_ordered_data_list = self.runningSum(self.ordered_data())
+            self.cumulative_ordered_data_list = self.runningSum(self.orderedData())
             self.is_cumulative = True
-        return cumulative_ordered_data_list
+        return self.cumulative_ordered_data_list
 
     def orderedData(self):
         if not self.is_sorted:

@@ -54,6 +54,9 @@ class FrequencyBase(Moments, Percentiles):
 
     @abstractmethod
     def percentile(self, percentile):
+        #data = self.cumulative_ordered_data()
+        #percentile * self.total
+        #return data[bisect.bisect_left(map(lambda a:a[1],data), 70)][0]
         #return bisect.bisect_left(self.ordered_data)
         # make this a custom bisect b/c of this data[bisect.bisect_left(map(lambda a:a[1],data), 70)][0]
         pass
@@ -82,16 +85,16 @@ class FrequencyBase(Moments, Percentiles):
         return sum(i ** n for i in self.explode())
 
     def pdf(self):
-        return dict((k, v / self.n) for k,v in self.condensed())
+        return [(k, v / self.n) for k,v in self.condensed()]
+
+    def pdfAsMap(self):
+        return dict(self.pdf())
 
     def cdf(self):
-        cdf, current = {}, 0
+        return map(lambda a: (a[0], a[1] / self.n), self.cumulative_ordered_data())
 
-        for k,v in self.condensed():
-            current += (v / self.n)
-            cdf[k] = current
-
-        return cdf
+    def cdfAsMap(self):
+        return dict(self.cdf())
 
     def optimumBinWidth(self):
         return 2 * (self.iqr() / pow(self.n, 1/3.))
