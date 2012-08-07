@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 import math
+from bisect import bisect_left
 from datatools.Moments import Moments
 from datatools.Percentiles import Percentiles
 
@@ -52,14 +53,12 @@ class FrequencyBase(Moments, Percentiles):
     def mode(self):
         pass
 
-    @abstractmethod
     def percentile(self, percentile):
-        #data = self.cumulative_ordered_data()
-        #percentile * self.total
-        #return data[bisect.bisect_left(map(lambda a:a[1],data), 70)][0]
-        #return bisect.bisect_left(self.ordered_data)
-        # make this a custom bisect b/c of this data[bisect.bisect_left(map(lambda a:a[1],data), 70)][0]
-        pass
+        if percentile > 1.0:
+            raise PercentageGreaterThanOne(percentile)
+
+        data = self.cdf()
+        return data[bisect_left(map(lambda a:a[1], data), percentile)][0]
 
     @abstractmethod
     def orderedData(self):
@@ -87,11 +86,11 @@ class FrequencyBase(Moments, Percentiles):
     def pdf(self):
         return [(k, v / self.n) for k,v in self.condensed()]
 
-    def pdfAsMap(self):
-        return dict(self.pdf())
-
     def cdf(self):
         return map(lambda a: (a[0], a[1] / self.n), self.cumulative_ordered_data())
+
+    def pdfAsMap(self):
+        return dict(self.pdf())
 
     def cdfAsMap(self):
         return dict(self.cdf())

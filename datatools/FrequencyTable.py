@@ -18,24 +18,6 @@ class FrequencyTable(FrequencyBase):
         self.min = min(self.min, key)
         self.resetFlags()
 
-    def percentile(self, percentile):
-        """
-            takes a percentile
-            returns the key for that percentile
-        """
-        if percentile > 1.0:
-            raise PercentageGreaterThanOne(percentile)
-
-        p = percentile * self.n
-        c = 0
-
-        for k,v in self.orderedData():
-            c += v
-            if c >= p:
-                return k
-
-        return k
-
     def mode(self):
         return max(self.data.iteritems(), key = lambda a:a[1])[0]
 
