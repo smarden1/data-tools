@@ -16,7 +16,7 @@ class Moments(object):
         return (self.moment(2)) - (self.mean() ** 2)
 
     def std(self):
-        return math.sqrt(self.variance)
+        return math.sqrt(self.variance())
 
     def skew(self):
         return ((self.moment(3) / self.n) - (3 * self.mean() * self.variance) - self.mean ** 3) / (self.std **3)
